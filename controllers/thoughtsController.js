@@ -122,7 +122,7 @@ module.exports = {
         try {
             const thought = await Thought.findOneAndUpdate(
                 { _id: req.params.thoughtId },
-                { $pull: { reactions: { reactionId: req.params.reactionId }}},
+                { $pull: { reactions: { _id: req.params.reactionId }}},
                 {  new: true }
             );
 
@@ -130,7 +130,7 @@ module.exports = {
                 return res.status(404).json({ message: 'No thought with this id!'})
             }
 
-            res.json(thought);
+            res.json({message: "Reaction removed! " });
         } catch (err) {
             res.status(500).json(err);
           }
